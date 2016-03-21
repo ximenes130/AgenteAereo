@@ -4,6 +4,7 @@ Projeto de IA que é para quarta agora!!!!!
 
 ### Informações
 
+- Alterar o código sómente em um novo galho !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 - IDE utilizada: NetBeans
 - Site Jade: http://jade.tilab.com/
 - Link da biblioteca: http://jade.tilab.com/dl.php?file=JADE-bin-4.4.0.zip
