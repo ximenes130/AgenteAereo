@@ -15,13 +15,14 @@ import pojos.Voo;
  * @author Luiz Eduardo
  */
 public class AgenteCompanhiaAerea extends Agent{
-    ArrayList voos;
+    private ArrayList voos;
+    private String nomeCompanhia;
     
     protected void setup() {
+        voos = new ArrayList();
+        this.nomeCompanhia = "Mathias - "+ getAID().getName();
         // Mensagem que sinaliza a existencia desse agente no mundo
         System.out.println("Novo agente rodando - "+getAID().getName()+";");
-        
-        voos = new ArrayList();
         
         for(int i=0 ; i<15 ; i++){
             Voo v = new Voo();
