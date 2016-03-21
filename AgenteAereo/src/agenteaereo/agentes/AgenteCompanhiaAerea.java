@@ -21,6 +21,7 @@ public class AgenteCompanhiaAerea extends Agent{
     protected void setup() {
         voos = new ArrayList();
         this.nomeCompanhia = "Mathias - "+ getAID().getName();
+        
         // Mensagem que sinaliza a existencia desse agente no mundo
         System.out.println("Novo agente rodando - "+getAID().getName()+";");
         
