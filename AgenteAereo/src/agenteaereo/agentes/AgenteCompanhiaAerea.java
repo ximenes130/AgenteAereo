@@ -5,9 +5,11 @@
  */
 package agenteaereo.agentes;
 
+import agenteaereo.agentes.comportamentos.BehaviourDispVoo;
 import jade.core.Agent;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import pojos.Voo;
 
 /**
@@ -15,7 +17,7 @@ import pojos.Voo;
  * @author Luiz Eduardo
  */
 public class AgenteCompanhiaAerea extends Agent{
-    private ArrayList voos;
+    private List voos;
     private String nomeCompanhia;
     
     protected void setup() {
@@ -30,16 +32,21 @@ public class AgenteCompanhiaAerea extends Agent{
             
             v.setNumeroVoo((int)Math.random()%10000);
             v.setPreco((float)Math.random()%100 + 800);
-            v.setAeroportoChegada("Aeroporto n:"+ Math.random()%1000);
-            v.setAeroportoPartida("Aeroporto n:"+ Math.random()%1000);
+            v.setAeroportoChegada("Aeroporto n: "+ Math.random()%1000);
+            v.setAeroportoPartida("Aeroporto n: "+ Math.random()%1000);
             v.setDataSaida  (new Date((int)(2020+Math.random()%5), 10, (int)Math.random()%20,12,30));
             v.setDataChegada(new Date((int)(2020+Math.random()%5), 10, (int)Math.random()%20,12,30));
             
             voos.add(v);
         }
         
-        //addBehaviour(new PublicaVoos());
+        // Adicionando Comportamento que responde a quem procura pela lista de voos
+        addBehaviour(new BehaviourDispVoo(this.voos));
         //addBehaviour(new VenderVoo());
     }
-
+    
+    
+    protected void takeDown() {
+        System.out.println("Encerrando o agente de Companhia Aérea "+getAID().getName()+";");
+    }
 }

@@ -1,7 +1,8 @@
 package pojos;
+import java.io.Serializable;
 import java.util.Date;
 
-public class Voo {
+public class Voo implements Serializable{
 
     private float preco;
     private int   numeroVoo;
