@@ -1,18 +1,28 @@
 package pojos;
+import java.io.Serializable;
 import java.util.Date;
 
-public class Voo {
+public class Voo implements Serializable{
 
-    private float preco;
-    private int   numeroVoo;
+    private float   preco;
+    private int     qtdAcentos;
+    private int     numeroVoo;
     private String  aeroportoPartida;
     private String  aeroportoChegada;
-    private Date  dataSaida;
-    private Date  dataChegada;
+    private Date    dataSaida;
+    private Date    dataChegada;
 
     public Voo(){
     }
 
+    public int getQtdAcentos() {
+        return qtdAcentos;
+    }
+
+    public void setQtdAcentos(int qtdAcentos) {
+        this.qtdAcentos = qtdAcentos;
+    }
+    
     public float getPreco() {
         return preco;
     }
