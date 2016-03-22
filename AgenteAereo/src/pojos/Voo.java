@@ -1,9 +1,11 @@
 package pojos;
+import jade.core.AID;
 import java.io.Serializable;
 import java.util.Date;
 
 public class Voo implements Serializable{
 
+    private AID     aidCompanhia;
     private float   preco;
     private int     qtdAcentos;
     private int     numeroVoo;
@@ -13,6 +15,14 @@ public class Voo implements Serializable{
     private Date    dataChegada;
 
     public Voo(){
+    }
+
+    public AID getAidCompanhia() {
+        return aidCompanhia;
+    }
+
+    public void setAidCompanhia(AID aidCompanhia) {
+        this.aidCompanhia = aidCompanhia;
     }
 
     public int getQtdAcentos() {

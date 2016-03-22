@@ -26,7 +26,7 @@ public class AgenteCompanhiaAerea extends Agent {
 
     protected void setup() {
         this.voos = new ArrayList();
-        this.nomeCompanhia = "Mathias - " + getAID().getName();
+        this.nomeCompanhia = getAID().getName();
 
         // Mensagem que sinaliza a existencia desse agente no mundo
         System.out.println("Novo agente rodando - " + getAID().getName() + ";");
@@ -34,7 +34,9 @@ public class AgenteCompanhiaAerea extends Agent {
         for (int i = 0; i < Math.random() % 3 + 3; i++) {
             Voo v = new Voo();
 
+            v.setAidCompanhia(getAID());
             v.setNumeroVoo(i);
+            v.setQtdAcentos(3);
             v.setPreco(((int) Math.random() % 100f) + 800);
             v.setAeroportoChegada("Aeroporto n: " + Math.random() % 1000);
             v.setAeroportoPartida("Aeroporto n: " + Math.random() % 1000);
