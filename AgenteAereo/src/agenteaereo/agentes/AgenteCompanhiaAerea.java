@@ -31,18 +31,18 @@ public class AgenteCompanhiaAerea extends Agent {
         // Mensagem que sinaliza a existencia desse agente no mundo
         System.out.println("Novo agente rodando - " + getAID().getName() + ";");
 
-        for (int i = 0; i < Math.random()%3+3; i++) {
+        for (int i = 0; i < Math.random() % 3 + 3; i++) {
             Voo v = new Voo();
 
             v.setNumeroVoo(i);
-            v.setPreco( ((int)Math.random() % 100f) + 800);
+            v.setPreco(((int) Math.random() % 100f) + 800);
             v.setAeroportoChegada("Aeroporto n: " + Math.random() % 1000);
             v.setAeroportoPartida("Aeroporto n: " + Math.random() % 1000);
             v.setDataSaida(new Date((int) (2020 + Math.random() % 5), 10, (int) Math.random() % 20, 12, 30));
             v.setDataChegada(new Date((int) (2020 + Math.random() % 5), 10, (int) Math.random() % 20, 12, 30));
-            
+
             voos.add(v);
-            System.out.println("Novo voo ("+v.getNumeroVoo()+" - R$"+v.getPreco()+") de "+getAID().getName());
+            System.out.println("Novo voo (" + v.getNumeroVoo() + " - R$" + v.getPreco() + ") de " + getAID().getName());
         }
 
         // Adicionando Comportamento que responde a quem procura pela lista de voos
@@ -51,27 +51,29 @@ public class AgenteCompanhiaAerea extends Agent {
             public void action() {
                 ACLMessage msg = myAgent.receive();     // Recebendo mensagem
                 if (msg != null) {                      // Verificando se mensagem foi recebida
-                    // Processando mensagem
-
-                    String titulo = msg.getContent();
-                    ACLMessage retorno = msg.createReply();     // Criando resposta para a mensagem
-                    
-                    System.out.println("Mensagem recebida: "+ titulo);
-
-                    if (voos != null) {                 // Verificando se existem voos
-                        retorno.setPerformative(ACLMessage.PROPOSE);
+                    if (msg.getPerformative() == ACLMessage.REQUEST) {   
+                        // Processando mensagem
                         
-                        try{
-                            retorno.setContentObject(voos);
-                        }catch(Exception e){
-                            e.printStackTrace();
+                        String titulo = msg.getContent();
+                        ACLMessage retorno = msg.createReply();     // Criando resposta para a mensagem
+
+                        System.out.println("Mensagem recebida: " + titulo);
+
+                        if (voos != null) {                 // Verificando se existem voos
+                            retorno.setPerformative(ACLMessage.INFORM);
+
+                            try {
+                                retorno.setContentObject(voos);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        } else {
+                            // The requested book is NOT available for sale.
+                            retorno.setPerformative(ACLMessage.REFUSE);
+                            retorno.setContent("Não há voos disponiveis aqui");
                         }
-                    } else {
-                        // The requested book is NOT available for sale.
-                        retorno.setPerformative(ACLMessage.REFUSE);
-                        retorno.setContent("Não há voos disponiveis aqui");
+                        myAgent.send(retorno);
                     }
-                    myAgent.send(retorno);
                 } else {
                     // Bloqueando comportamento caso não haja mensagem, economizando recursos.
                     // Qdo nova mensagem é transmitida todos os comportamentos são desbloqueados.
