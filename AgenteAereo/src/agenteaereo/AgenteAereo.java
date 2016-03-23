@@ -5,9 +5,6 @@
  */
 package agenteaereo;
 
-import agenteaereo.agentes.AgenteCompanhiaAerea;
-import jade.wrapper.AgentController;
-
 /**
  *
  * @author Luiz Eduardo
@@ -18,7 +15,6 @@ public class AgenteAereo {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
     }
     
 }
