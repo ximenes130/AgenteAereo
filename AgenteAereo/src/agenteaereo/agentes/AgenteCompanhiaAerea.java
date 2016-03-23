@@ -7,12 +7,13 @@ package agenteaereo.agentes;
 
 import jade.core.Agent;
 import jade.core.behaviours.CyclicBehaviour;
+import jade.domain.DFService;
+import jade.domain.FIPAAgentManagement.DFAgentDescription;
+import jade.domain.FIPAAgentManagement.ServiceDescription;
+import jade.domain.FIPAException;
 import jade.lang.acl.ACLMessage;
-import jade.lang.acl.UnreadableException;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import pojos.Voo;
 
 /**
@@ -30,6 +31,22 @@ public class AgenteCompanhiaAerea extends Agent {
 
         // Mensagem que sinaliza a existencia desse agente no mundo
         System.out.println("Novo agente rodando - " + getAID().getName() + ";");
+        
+         // Registrando o agente no catalogo de agentes
+        DFAgentDescription dfd = new DFAgentDescription();                      // Instanciando descrição do agente
+        dfd.setName(getAID());                                                  // Salvando AID do agente
+        ServiceDescription serviceDescription = new ServiceDescription();       // Instanciando descrição do serviç
+        serviceDescription.setType("companhia-aerea");                          // Salvando tipo de serviço
+        serviceDescription.setName("JADE-voo-desponibilisador");                // Salvando nome do serviço
+        dfd.addServices(serviceDescription);                                    // Adicionando serviço na descrição
+        
+        try {
+            DFService.register(this, dfd);                                      // Registrando agente no catalogo
+        }
+        catch (FIPAException e) {
+            e.printStackTrace();
+        }
+        
 
         for (int i = 0; i < Math.random() % 3 + 3; i++) {
             Voo v = new Voo();
@@ -37,7 +54,7 @@ public class AgenteCompanhiaAerea extends Agent {
             v.setAidCompanhia(getAID());
             v.setNumeroVoo(i);
             v.setQtdAcentos(3);
-            v.setPreco(((int) Math.random() % 100f) + 800);
+            v.setPreco(((int) Math.random() % 100) + 800);
             v.setAeroportoChegada("Aeroporto n: " + Math.random() % 1000);
             v.setAeroportoPartida("Aeroporto n: " + Math.random() % 1000);
             v.setDataSaida(new Date((int) (2020 + Math.random() % 5), 10, (int) Math.random() % 20, 12, 30));
@@ -87,6 +104,16 @@ public class AgenteCompanhiaAerea extends Agent {
     }
 
     protected void takeDown() {
+        
+        // Removendo agente do catalogo
+        try {
+            DFService.deregister(this);
+        }
+        catch (FIPAException e) {
+            e.printStackTrace();
+        }
+
+        // Sinalizando o encerramento do agente
         System.out.println("Encerrando o agente de Companhia Aérea " + getAID().getName() + ";");
     }
 }

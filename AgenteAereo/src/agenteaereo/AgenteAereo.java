@@ -15,11 +15,6 @@ public class AgenteAereo {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        String[] bootArgs = {
-            "-gui ",
-            "Gol:agenteaereo.agentes.AgenteCompanhiaAerea",
-        };
-        jade.Boot.main(bootArgs);
     }
     
 }
