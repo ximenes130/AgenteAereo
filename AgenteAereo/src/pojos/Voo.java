@@ -1,6 +1,7 @@
 package pojos;
 import jade.core.AID;
 import java.io.Serializable;
+import java.util.Comparator;
 import java.util.Date;
 
 public class Voo implements Serializable{
@@ -16,7 +17,18 @@ public class Voo implements Serializable{
 
     public Voo(){
     }
-
+    
+    @Override
+    public String toString(){
+        String retorno = "{Voo - numeroVoo=\""+getNumeroVoo()+"\" - preco=\""+getPreco()+"\" - companhia=\""+getAidCompanhia().getName()+"\"}";
+        
+        return retorno;
+    }
+    
+    // /////////////////////
+    // Gerrers & Setters  //
+    // /////////////////////
+    
     public AID getAidCompanhia() {
         return aidCompanhia;
     }
@@ -80,8 +92,5 @@ public class Voo implements Serializable{
     public void setDataChegada(Date dataChegada) {
         this.dataChegada = dataChegada;
     }
-
-    
-    
 }
 

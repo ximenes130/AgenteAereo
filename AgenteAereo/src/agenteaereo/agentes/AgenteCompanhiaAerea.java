@@ -48,19 +48,17 @@ public class AgenteCompanhiaAerea extends Agent {
         }
         
 
-        for (int i = 0; i < Math.random() % 3 + 3; i++) {
+        for (int i = 0; i < Math.random() * 3 + 3; i++) {
             Voo v = new Voo();
 
             v.setAidCompanhia(getAID());
             v.setNumeroVoo(i);
             v.setQtdAcentos(3);
-            v.setPreco(((int) Math.random() % 100) + 800);
-            v.setAeroportoChegada("Aeroporto n: " + Math.random() % 1000);
-            v.setAeroportoPartida("Aeroporto n: " + Math.random() % 1000);
-            v.setDataSaida(new Date((int) (2020 + Math.random() % 5), 10, (int) Math.random() % 20, 12, 30));
-            v.setDataChegada(new Date((int) (2020 + Math.random() % 5), 10, (int) Math.random() % 20, 12, 30));
-
-            System.out.println("Numero aleatorio - "+ Math.random());
+            v.setPreco((int)(Math.random() * 100) + 800);
+            v.setAeroportoChegada("Aeroporto n: " + Math.random() * 1000);
+            v.setAeroportoPartida("Aeroporto n: " + Math.random() * 1000);
+            v.setDataSaida(new Date((int) (2020 + Math.random() * 5), 10, (int) Math.random() * 20, 12, 30));
+            v.setDataChegada(new Date((int) (2020 + Math.random() * 5), 10, (int) Math.random() * 20, 12, 30));
             
             voos.add(v);
             System.out.println("Novo voo (" + v.getNumeroVoo() + " - R$" + v.getPreco() + ") de " + getAID().getName());
@@ -102,7 +100,6 @@ public class AgenteCompanhiaAerea extends Agent {
                 }
             }
         });
-        //addBehaviour(new VenderVoo());
     }
 
     protected void takeDown() {
