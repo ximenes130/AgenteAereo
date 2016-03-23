@@ -56,6 +56,7 @@ public class AgenteCliente extends Agent{
                     // System.out.println("sms("+i+") - "+ listaCompanhias[i].getName());
                 }
                 
+                mensagem.setPerformative(ACLMessage.REQUEST);
                 mensagem.setContent("requisito-voos");
                 myAgent.send(mensagem);
             }

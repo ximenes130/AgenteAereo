@@ -60,6 +60,8 @@ public class AgenteCompanhiaAerea extends Agent {
             v.setDataSaida(new Date((int) (2020 + Math.random() % 5), 10, (int) Math.random() % 20, 12, 30));
             v.setDataChegada(new Date((int) (2020 + Math.random() % 5), 10, (int) Math.random() % 20, 12, 30));
 
+            System.out.println("Numero aleatorio - "+ Math.random());
+            
             voos.add(v);
             System.out.println("Novo voo (" + v.getNumeroVoo() + " - R$" + v.getPreco() + ") de " + getAID().getName());
         }
